@@ -8,6 +8,7 @@ const resultDiv = document.getElementById("result");
 const numberButtons = document.querySelectorAll(".number-button");
 const operatorButtons = document.querySelectorAll(".operator-button");
 const equalButton = document.querySelectorAll(".equal");
+const clearAllButton = document.querySelectorAll(".clear-all");
 
 // Sets the display to 0
 updateDisplay(currentResult);
@@ -16,8 +17,20 @@ updateDisplay(currentResult);
 numberButtonClicks();
 operatorButtonClicks();
 equalButtonClick();
+clearAll()
 
 // Functions
+function clearAll() {
+  clearAllButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      operator = "";
+      displayValue = "";
+      currentResult = "";
+      updateDisplay(displayValue);
+    });
+  });
+}
+
 function numberButtonClicks() {
   numberButtons.forEach((button) => {
     button.addEventListener("click", () => {
