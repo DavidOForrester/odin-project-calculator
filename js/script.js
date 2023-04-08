@@ -1,7 +1,7 @@
 // Variables
 let operator = "";
 let displayValue = "";
-let currentResult = 0;
+let currentResult = "";
 let inputFunction = "";
 
 const resultDiv = document.getElementById("result");
@@ -17,44 +17,39 @@ numberButtonClicks();
 operatorButtonClicks();
 equalButtonClick();
 
-
 // Functions
 function numberButtonClicks() {
-    numberButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        displayValue += button.textContent;
-        updateDisplay(displayValue);
-      });
+  numberButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      displayValue += button.textContent;
+      updateDisplay(displayValue);
     });
-  }
-  
-  function operatorButtonClicks() {
-    operatorButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        operator = button.textContent;
-  
-        // Update display to current
-        currentResult = displayValue;
-  
-        // clear display
-        displayValue = "";
-  
-        // update display
-        updateDisplay(displayValue);
-      });
-    });
-  }
-  
-  function equalButtonClick() {
-    equalButton.forEach((button) => {
-      button.addEventListener("click", () => {
-        console.log(`${currentResult} ${operator} ${displayValue}`);
-        currentResult = operate(operator, currentResult, displayValue);
-        updateDisplay(currentResult);
-      });
-    });
-  }
+  });
+}
 
+function operatorButtonClicks() {
+  operatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      operator = button.textContent;
+      if (currentResult != "") {
+        currentResult = operate(operator, currentResult, displayValue);
+      } else {
+        currentResult = displayValue;
+      }
+      displayValue = "";
+      updateDisplay(displayValue);
+    });
+  });
+}
+
+function equalButtonClick() {
+  equalButton.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentResult = operate(operator, currentResult, displayValue);
+      updateDisplay(currentResult);
+    });
+  });
+}
 
 function add(num1, num2) {
   return num1 + num2;
@@ -90,5 +85,3 @@ function operate(operator, num1, num2) {
 function updateDisplay(update) {
   resultDiv.textContent = update;
 }
-
-

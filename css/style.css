@@ -6,6 +6,10 @@ body {
     max-width: 190px;
 }
 
+#result {
+    height: 20px;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
