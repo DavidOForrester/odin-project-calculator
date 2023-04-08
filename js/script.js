@@ -1,3 +1,61 @@
+// Variables
+let operator = "";
+let displayValue = "";
+let currentResult = 0;
+let inputFunction = "";
+
+const resultDiv = document.getElementById("result");
+const numberButtons = document.querySelectorAll(".number-button");
+const operatorButtons = document.querySelectorAll(".operator-button");
+const equalButton = document.querySelectorAll(".equal");
+
+// Sets the display to 0
+updateDisplay(currentResult);
+
+// Starts the check for button clicks
+numberButtonClicks();
+operatorButtonClicks();
+equalButtonClick();
+
+
+// Functions
+function numberButtonClicks() {
+    numberButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        displayValue += button.textContent;
+        updateDisplay(displayValue);
+      });
+    });
+  }
+  
+  function operatorButtonClicks() {
+    operatorButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        operator = button.textContent;
+  
+        // Update display to current
+        currentResult = displayValue;
+  
+        // clear display
+        displayValue = "";
+  
+        // update display
+        updateDisplay(displayValue);
+      });
+    });
+  }
+  
+  function equalButtonClick() {
+    equalButton.forEach((button) => {
+      button.addEventListener("click", () => {
+        console.log(`${currentResult} ${operator} ${displayValue}`);
+        currentResult = operate(operator, currentResult, displayValue);
+        updateDisplay(currentResult);
+      });
+    });
+  }
+
+
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -15,45 +73,22 @@ function divide(num1, num2) {
 }
 
 function operate(operator, num1, num2) {
+  number1 = Number(num1);
+  number2 = Number(num2);
+
   if (operator == "+") {
-    return add(num1, num2);
+    return add(number1, number2);
   } else if (operator == "-") {
-    return subtract(num1, num2);
+    return subtract(number1, number2);
   } else if (operator == "x") {
-    return multiply(num1, num2);
+    return multiply(number1, number2);
   } else if (operator == "/") {
-    return divide(num1, num2);
+    return divide(number1, number2);
   }
 }
 
 function updateDisplay(update) {
-  const resultDiv = document.getElementById("result");
   resultDiv.textContent = update;
 }
 
-let operator = "";
-let num1 = 0;
-let num2 = 0;
-let inputNumber = null;
-let inputFunction = "";
 
-// TODO: need to work out how to get the number back out of this function
-const numberButtons = document.querySelectorAll(".number-button");
-
-numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    inputNumber = button.textContent;
-    updateDisplay(inputNumber);
-  });
-});
-
-console.log(inputNumber);
-
-const functionButtons = document.querySelectorAll(".function-button");
-
-functionButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    inputFunction = button.textContent;
-    console.log(inputFunction);
-  });
-});

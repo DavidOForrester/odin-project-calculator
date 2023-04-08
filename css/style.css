@@ -2,8 +2,33 @@ body {
     font-family: sans-serif;
     background-color: black;
     color: white;
+    text-align: right;
+    max-width: 190px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    max-width: 190px;
+    background-color: grey;
 }
 
 .function-buttons>button {
     background-color: aqua;
+    margin: 5px;
+}
+
+.operator-buttons>button,
+.number-buttons>button {
+    height: 20px;
+    width: 20px;
+}
+
+.operator-buttons>button {
+    background-color: pink;
+    margin: 5px;
+}
+
+.number-buttons>button {
+    margin: 5px;
 }
